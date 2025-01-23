@@ -1,0 +1,2 @@
+This folder contains abstract contracts meant to formalize and abstract some of the redundant work when contracts contain roles.
+The contracts in this folder are meant to be inherited by other contracts, and are not meant to be deployed on their own.

@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: ISC
+pragma solidity ^0.8.23;
+
+import { BaseScript } from "frax-std/BaseScript.sol";
+import { LendingPool, LendingPoolParams } from "src/contracts/lending-pool/LendingPool.sol";
+import { ValidatorPool } from "src/contracts/ValidatorPool.sol";
+import "src/Constants.sol" as Constants;
+
+function deployLendingPool() returns (BaseScript.DeployReturn memory _return) {
+    // NOTE: Make sure to set these addresses to the correct ones
+    address _etherRouterAddress = address(1234);
+    address _beaconOracleAddress = address(1234);
+    address _redemptionQueueAddress = address(1234);
+    address _interestRateCalculatorAddress = address(1234);
+
+    LendingPoolParams memory _params = LendingPoolParams({
+        timelockAddress: Constants.Mainnet.TIMELOCK_ADDRESS,
+        etherRouterAddress: payable(_etherRouterAddress),
+        beaconOracleAddress: _beaconOracleAddress,
+        redemptionQueueAddress: payable(_redemptionQueueAddress),
+        interestRateCalculatorAddress: _interestRateCalculatorAddress,
+        validatorPoolCreationCode: type(ValidatorPool).creationCode,
+        fullUtilizationRate: 1e18
+    });
+    // frxEthErc20Address: Constants.Mainnet.FRX_ETH_ERC20_ADDRESS,
+    // initialQueueLengthSeconds: 2 weeks
+
+    LendingPool _lendingPool = new LendingPool(_params);
+
+    _return._address = address(_lendingPool);
+    _return.constructorParams = abi.encode(_params);
+    _return.contractName = "LendingPool";
+}
+
+contract DeployLendingPool is BaseScript {
+    function run() public returns (BaseScript.DeployReturn memory _return) {
+        _return = deploy(deployLendingPool);
+    }
+}

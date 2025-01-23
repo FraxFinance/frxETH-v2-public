@@ -1,0 +1,41 @@
+{
+  "name": "frax-ether-v2-dev",
+  "version": "0.0.0",
+  "description": "TODO ## Overview Documentation TODO",
+  "main": " ",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "generate:constants": "ts-node -T node-scripts/generateConstants.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FraxFinance/frxETH_V2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FraxFinance/frxETH_V2/issues"
+  },
+  "homepage": "https://github.com/FraxFinance/frxETH_V2#readme",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^5.0.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-solidity": "^1.3.1",
+    "solhint": "^4.1.1",
+    "solhint-plugin-prettier": "^0.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.8.0",
+    "forge-std": "^1.1.2",
+    "frax-standard-solidity": "github:FraxFinance/frax-standard-solidity",
+    "solmate": "github:transmissions11/solmate"
+  }
+}

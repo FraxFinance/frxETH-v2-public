@@ -1,0 +1,58 @@
+// SPDX-License-Identifier: ISC
+pragma solidity ^0.8.19;
+
+import { BaseScript } from "frax-std/BaseScript.sol";
+import { console } from "frax-std/FraxTest.sol";
+import { IFrxEth } from "src/contracts/frxeth-redemption-queue-v2/interfaces/IFrxEth.sol";
+import { LendingPool, LendingPoolParams } from "src/contracts/lending-pool/LendingPool.sol";
+import { ValidatorPool } from "src/contracts/ValidatorPool.sol";
+import "src/test/frax-ether-redemption-queue-v2/Constants.sol" as ConstantsDep;
+
+struct DeployValidatorPoolReturn {
+    address _address;
+    bytes constructorParams;
+    string contractName;
+}
+
+function deployValidatorPool() returns (DeployValidatorPoolReturn memory _return) {
+    // Instantiate the existing LendingPool
+    LendingPool lendingPool = LendingPool(payable(0x0754Af179B55b07EBd253D7C09d741Bb0bDeC7d7));
+
+    // Deploy a ValidatorPool
+    (address payable _vPoolAddress) = lendingPool.deployValidatorPool(msg.sender, bytes32(0));
+
+    // Calculate the constructor params
+    // _return.constructorParams = abi.encode(msg.sender, bytes32(0));
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // FOR VERIFICATIONS, THE ACTUAL CONSTRUCTOR PARAMS ARE 
+    // constructor(
+    //     address _ownerAddress,
+    //     address payable _lendingPoolAddress,
+    //     address payable _eth2DepositAddress
+    // )
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // Get return info
+    _return.contractName = "ValidatorPool";
+    _return._address = _vPoolAddress;
+}
+
+contract DeployValidatorPool is BaseScript {
+    function run()
+        external
+        broadcaster
+        returns (address _address, bytes memory _constructorParams, string memory _contractName)
+    {
+        DeployValidatorPoolReturn memory _return = deployValidatorPool();
+        console.log("_constructorParams:", string(abi.encode(_constructorParams)));
+        console.logBytes(_return.constructorParams);
+        console.log("_address:", _return._address);
+        _updateEnv(_return._address, _return.constructorParams, _return.contractName);
+    }
+}

@@ -1,0 +1,7 @@
+helper_dir = "src/test/helpers"
+files = [
+  "src/contracts/lending-pool/LendingPool.sol",
+  "src/contracts/ValidatorPool.sol",
+  "src/contracts/ether-router/EtherRouter.sol",
+  "src/contracts/BeaconOracle.sol"
+]

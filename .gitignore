@@ -1,0 +1,63 @@
+# Compiler files
+cache/
+out/
+
+# Code Coverage
+lcov.info
+/report
+
+# Ignores development broadcast logs
+broadcast
+forge-cache
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Dotenv file
+.env
+
+# Bin
+bin
+
+# Logs
+npm.txt
+logs
+*.log
+
+# DS_Store
+.DS_Store
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env*
+.env
+.env.forge
+.env.test
+.env.save
+..env.swp
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# Fake validator keys
+/node-scripts/test-validator-jsons
+/node-scripts/test-validator-jsons/*
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Node Modules
+node_modules
+
+# VSCode
+.vscode
+
+# Slither
+slither_results.md

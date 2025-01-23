@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: ISC
+pragma solidity ^0.8.23;
+
+import { BaseScript } from "frax-std/BaseScript.sol";
+import { CurveLsdAmo, CurveLsdAmoConstructorParams } from "src/contracts/curve-amo/CurveLsdAmo.sol";
+import { CurveLsdAmoHelper } from "src/contracts/curve-amo/CurveLsdAmoHelper.sol";
+import "src/Constants.sol" as Constants;
+
+function deployCurveLsdAMO() returns (BaseScript.DeployReturn memory _return) {
+    // NOTE: Make sure to set these addresses to the correct ones
+    address operatorAddress = address(1234);
+    address amoHelperAddress = address(1234);
+    address incentivesPoolAddress = address(1234);
+    address frxEthMinterAddress = address(1234);
+    address etherRouterAddress = address(1234);
+
+    CurveLsdAmoConstructorParams memory _params = CurveLsdAmoConstructorParams({
+        timelockAddress: payable(Constants.Mainnet.TIMELOCK_ADDRESS),
+        operatorAddress: operatorAddress,
+        amoHelperAddress: amoHelperAddress,
+        incentivesPoolAddress: incentivesPoolAddress,
+        frxEthMinterAddress: frxEthMinterAddress,
+        etherRouterAddress: payable(etherRouterAddress)
+    });
+
+    CurveLsdAmo _curveLsdAmo = new CurveLsdAmo(_params);
+
+    _return._address = address(_curveLsdAmo);
+    _return.constructorParams = abi.encode(_params);
+    _return.contractName = "CurveLsdAmo";
+}
+
+contract DeployCurveLsdAMO is BaseScript {
+    function run() public returns (BaseScript.DeployReturn memory _return) {
+        _return = deploy(deployCurveLsdAMO);
+    }
+}

@@ -1,0 +1,67 @@
+[profile.default]
+src = 'src/contracts'
+test = 'src/test'
+script = 'src/script'
+out = 'out'
+#optimizer = false # makes compilation faster for testing, switch for production. Also helps with source mapping
+#optimizer_runs = 10
+optimizer = true
+optimizer_runs = 800
+libs = ['node_modules', 'lib']
+#fs_permissions = [{ access = "read", path = "./"}]
+fs_permissions = [{ access = "read-write", path = "./"}]
+ignored_error_codes = [1878, 2519, 5574,5667,2462, 2072,2018,3420, 9302]
+# To not include the metadata hash, to allow for deterministic code: https://docs.soliditylang.org/en/latest/metadata.html, use "none"
+#bytecode_hash = "none"
+# Whether to append the metadata hash to the bytecode
+#cbor_metadata = false
+# allow ffi
+ffi = true
+evm_version = "cancun"
+solc = '0.8.28'
+
+# Activate this by using export FOUNDRY_PROFILE=src && forge <command>
+[profile.src]
+test = "_" # Makes building faster
+script = "_"
+optimizer = false # makes compilation faster for testing, switch for production
+
+[profile.script]
+src = "_"
+test = "_"
+optimizer = false # makes compilation faster for testing, switch for production
+
+[profile.deploy]
+src = "_"
+test = "_"
+optimizer = true
+optimizer_runs = 1_000_000
+via_ir = true
+
+[profile.test]
+src = "_"
+script = "_"
+# sparse_mode = true
+optimizer = false
+build_info = false
+extra_output = []
+verbosity = 3
+match_path = "./src/test/lending-pool/**/*.t.sol"
+
+[fmt]
+line_length = 1000 # This gets overriden by prettier afterwards
+tab_width = 4
+bracket_spacing = true
+int_types = "long"
+number_underscore = "thousands"
+
+[fuzz]
+runs = 512 # Do 10000+ right before code freeze
+max_test_rejects = 25000
+seed = "0x0" # Remove this later so you have more randomness
+
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+[rpc_endpoints]
+mainnet = "${MAINNET_RPC_URL}"
+holesky = "${HOLESKY_RPC_URL}"

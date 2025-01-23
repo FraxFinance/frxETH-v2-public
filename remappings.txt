@@ -1,0 +1,8 @@
+ds-test/=lib/ds-test/src/
+forge-std/=lib/forge-std/src/
+frax-std/=node_modules/frax-standard-solidity/src/
+src/=src/
+frax-ether-redemption-queue/=lib/frax-ether-redemption-queue-dev/src/
+solmate/=node_modules/solmate/
+@chainlink/=node_modules/@chainlink/
+@openzeppelin/=node_modules/@openzeppelin/
